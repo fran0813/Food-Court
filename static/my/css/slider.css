@@ -1,0 +1,22 @@
+body{
+    background: url(../img/principal.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+div .titulo-q{
+    color: #000000;
+}
+
+div .letra-q{
+    color: #1800FF;
+}
+
+div .navegar{
+    background-color: #F24906;
+}
+
+div .white{
+    color: #FFFFFF;
+}
