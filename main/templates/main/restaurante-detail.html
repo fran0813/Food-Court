@@ -1,0 +1,54 @@
+{% extends 'main/base_template.html' %}
+{% block title %} Restaurante {% endblock %}
+
+{%  block content %}
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+   <div class="container backwhite">
+
+        <h1 class="titulo">{{ restaurante.nombre }}</h1>
+
+        <hr class="divider">
+
+        <div class="row">
+            <div class="col-md-7">
+                <h2 class="titulo-q"><b>Discripción</b></h2>
+                <p class="lead letra-q">{{ restaurante.informacion }}</p>
+                <center>
+                <a href="#"><img src="../../../static/my/img/menu.png" width="20%" height="10%" alt="No found"></a>
+                </center>
+            </div>
+            <div class="col-md-5 ">
+                <img src="/media/{{ restaurante.image }}" width="100%" height="100%" alt="No found">
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="row">
+            <div class="col-md-7">
+               <div class="form-group">
+              <label for="comment">Comentario:</label>
+              <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+            </div>
+            <div class="col-md-5 ">
+                <ul>
+                    <li><i class="fa fa-home" style="font-size: 30px"></i> {{ restaurante.direccion }} </li>
+                    <li><i class="fa fa-phone" style="font-size: 30px"></i> {{ restaurante.telefono }} </li>
+                    <li><i class="fa fa-chrome" style="font-size: 30px"></i><a class="colorn" href="{{ restaurante.sitioweb }}"> Sitio web</a></li>
+                </ul>
+                <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+                    <i class="fa fa-facebook"></i> Facebook
+                </a>
+                <a class="btn btn-link-1 btn-link-1-twitter" href="#">
+                    <i class="fa fa-twitter"></i> Twitter
+                </a>
+            </div>
+        </div>
+
+{% endblock %}

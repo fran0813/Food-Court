@@ -30,14 +30,14 @@ class Cliente(models.Model):
 		return '{}'.format(self.id)
 
 class Restaurante(models.Model):
-	id = models.IntegerField( primary_key=True, db_column='idrestaurante')
+	id = models.AutoField( primary_key=True, db_column='idrestaurante')
 	nombre = models.CharField(max_length = 45, db_column='nombre')
 	telefono = models.CharField(max_length = 45, db_column='telefono')
 	direccion = models.CharField(max_length = 45, db_column='direccion')
 	sitioweb = models.CharField(max_length = 45, db_column='sitioweb')
 	restaurante_cliente = models.ForeignKey(Cliente , db_column='restaurante_cliente')
 	informacion = models.TextField( db_column='informacion')
-	image = models.ImageField(upload_to='img/', default="../static/img/icono_perfil.png", db_column='imagen')
+	image = models.ImageField( upload_to = 'photos/' , default="../static/my/img/img4.jpg", db_column='imagen')
 
 
 	class Meta:

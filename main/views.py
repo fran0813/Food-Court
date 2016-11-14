@@ -1,8 +1,10 @@
-from django.shortcuts import render, render_to_response
+# -*- coding:utf-8 -*-
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
 from models import *
+from forms import RestauranteForm
 from django.template import RequestContext
 from validator import *
 
@@ -100,9 +102,21 @@ def principal(request):
     return render(request, 'main/principal.html')
        
 def restaurante(request):
-    user = User.objects.get( id = request.user.id )
     restaurante = Restaurante.objects.filter()
-    return render(request, 'main/restaurante.html', { 'user': user, 'restaurante': restaurante })
+    return render(request, 'main/restaurante.html', { 'restaurante': restaurante })
 
 def add_restaurante(request):
-    return render(request, 'main/add-restaurante.html' )
+    if request.method == "POST":
+        form = RestauranteForm(request.POST)
+        if form.is_valid():
+            restaurante = form.save(commit=False)
+            restaurante.restaurante_cliente_id = request.user.id
+            restaurante.save()
+            return redirect('restaurante-detalle', pk=restaurante.pk)
+    else:
+        form = RestauranteForm()
+    return render(request, 'main/add-restaurante.html', { 'form' : form } )
+
+def restaurante_detail(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    return render(request, 'main/restaurante-detail.html', {'restaurante': restaurante })

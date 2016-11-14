@@ -121,3 +121,7 @@ STATIC_URL = '/static/'
 
 #Directorio donde se almacenaran archivos css
 STATICFILES_DIRS = [ BASE_DIR + '/static' ]
+
+MEDIA_ROOT = BASE_DIR + '/media'
+
+MEDIA_URL = '/media/' # verificar URL's en urls.py
