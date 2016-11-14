@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Oleo+Script');
+
 body {
 	background: url(../img/principal.png);
 	background-repeat: no-repeat;
@@ -8,7 +10,6 @@ body {
     font-weight: 300;
     color: #888;
     line-height: 30px;
-    text-align: center;
 }
 
 strong { font-weight: 500; }
@@ -149,10 +150,19 @@ img { max-width: 100%; }
 
 .social-login {
 	margin-top: 10px;
+	text-align: center;
 }
 
 .social-login h3 {
-	color: #fff;
+	text-align: center;
+	color: #FFFFFF;
+	font-family: 'Oleo Script', cursive;
+	font-size: 40px;
+	text-shadow:
+   -1px -2px 0 #000000,
+    1px -2px 0 #000000,
+   -1px 2px 0 #000000,
+    1px 2px 0 #000000;
 }
 
 .social-login-buttons {
@@ -169,4 +179,64 @@ img { max-width: 100%; }
 	margin-left: 8%;
 	margin-right: 8%;
 	padding-left: 15%;
+}
+
+.color{
+	color: #FFFFFF;
+	font-family: 'Oleo Script', cursive;
+	font-size: 40px;
+	text-shadow:
+   -1px -2px 0 #000000,
+    1px -2px 0 #000000,
+   -1px 2px 0 #000000,
+    1px 2px 0 #000000;
+}
+
+.colorlogin{
+	color: #FF6E0C;
+	font-family: 'Oleo Script', cursive;
+	font-size: 40px;
+	text-shadow:
+   -1px -2px 0 #000000,
+    1px -2px 0 #000000,
+   -1px 2px 0 #000000,
+    1px 2px 0 #000000;
+}
+
+.coloruser{
+	color: #E64E4E;
+	font-family: 'Oleo Script', cursive;
+	font-size: 40px;
+	text-shadow:
+   -1px -2px 0 #000000,
+    1px -2px 0 #000000,
+   -1px 2px 0 #000000,
+    1px 2px 0 #000000;
+}
+
+.colorclient{
+	color: #B91E1E;
+	font-family: 'Oleo Script', cursive;
+	font-size: 40px;
+	text-shadow:
+   -1px -2px 0 #000000,
+    1px -2px 0 #000000,
+   -1px 2px 0 #000000,
+    1px 2px 0 #000000;
+}
+
+.pie{
+	background-color: #000000;
+}
+
+.circulo{
+	border-radius: 50%;
+	background-color: #B91414;
+	color: #FFFFFF;
+	font-size: 40px;
+}
+
+.whiteback{
+	color: #000000;
+	font-size: 25px;
 }

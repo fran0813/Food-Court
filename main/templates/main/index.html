@@ -21,19 +21,62 @@
 
 	<center>
 		<div class="container logo">
-		  <a href="{% url 'login' %}"><img class="img-responsive" src="{% static 'my/img/logo-app.png' %}"></a>
+		  <img class="img-responsive" src="{% static 'my/img/logo-app.png' %}" width="40%" height="30%">>
 		</div>
 		<br />
 		<div class="col-md-12">
-			<div class="col-md-6">
-		  		<a href="{% url 'registrar-usuario' %}"><img class="img-responsive" src="{% static 'my/img/users.png' %}" width="30%" height="30%"></a><p>Usuarios</p> 
+			<div class="col-md-6 col-md-offset-3">
+				<a href="{% url 'login' %}"><img class="img-responsive" src="{% static 'my/img/logologin.png' %}" width="30%" height="30%">></a><p class="colorlogin"><b>Login</b></p>
+			</div>
+		</div>
+		<br />
+		<div class="col-md-12">
+			<div class="col-md-6 col-md-offset-3">
+				<h1 class="color">Aun no tienes tu cuenta? <br> Registrate:</h1>
+			</div>
+		</div>
+		<br />
+		<div class="col-md-12">
+			<div class="col-md-5 col-md-offset-1">
+		  		<a href="{% url 'registrar-usuario' %}"><img class="img-responsive" src="{% static 'my/img/logousuario.png' %}" width="30%" height="30%"></a><p class="coloruser"><b>Usuarios</b></p> 
 		  	</div>
-			<div class="col-md-6">
-		  		<a href="{% url 'registrar-cliente' %}"><img class="img-responsive" src="{% static 'my/img/client.png' %}" width="30%" height="30%"></a><p>Clientes</p>
+			<div class="col-md-5">
+		  		<a href="{% url 'registrar-cliente' %}"><img class="img-responsive" src="{% static 'my/img/logocliente.png' %}" width="30%" height="30%"></a><p class="colorclient"><b>Clientes</b></p>
 		  	</div>
 		</div>
 
 	</center>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<div class="col-md-12">
+		<div class="row">
+			<div class="container-fluid pie">
+				<footer>
+		            <p>&copy; Francisco Navas. </p>
+		        </footer>	
+			</div>
+		</div>
+	</div>
 
 	
 	<script src="{% static 'jquery/jquery.min.js' %}"></script>
