@@ -19,7 +19,8 @@
                     <div class="col-sm-6 col-sm-offset-3 form-box">
                     	<div class="form-top">
                     		<div class="form-top-left">
-                    			<h3>Registrate a nuestro sitio web</h3>
+                                <a href="{% url 'index' %}" class="whiteback"><i class="fa fa-arrow-left circulo"></i> Regresa al inicio</a>
+                    			<h3> Registrate a nuestro sitio web</h3>
                     		</div>
                         </div>
                         <div class="form-bottom">
@@ -61,9 +62,9 @@
 		                        	<label class="sr-only" for="form-password">Confirmar contraseña</label>
 		                        	<input type="password" name="password2" placeholder="Confirmar contraseña..." class="form-password form-control" id="password2">
 		                        </div>
-		                        <button type="submit" class="btn">Entra!</button>
+		                        <button type="submit" class="btn">Registrate!</button>
                                 <div class="button-login">
-                                    <h3>Ya tienes cuenta? <a href="#">Ingresa</a></h3>
+                                    <h3>Ya tienes cuenta? <a href="{% url 'login' %}">Ingresa</a></h3>
                                 </div>
 		                    </form>
 	                    </div>
@@ -73,5 +74,18 @@
       
         
         </div>
+
+        <br>
+        <br>
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="container-fluid pie">
+                <footer>
+                    <p>&copy; Francisco Navas. </p>
+                </footer>   
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
