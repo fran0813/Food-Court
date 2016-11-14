@@ -1,10 +1,11 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from models import *
 from django.template import RequestContext
 from validator import *
+from food_court.settings import STATIC_ROLS
 
 def index(request):
     return render(request, 'main/index.html')
@@ -24,10 +25,10 @@ def registrar_usuario(request):
             usuario.username = request.POST['username']
             usuario.password = make_password(request.POST['password1'])
             usuario.is_active = True
-            # perfil = Group.objects.get(name="Estudiantes")  # carga un perfil de tipo usuario
+            grupo = Group.objects.get(name="Usuarios")  
             usuario.save()
-            # usuario.groups.add(perfil)
-            # usuario.save()
+            usuario.groups.add(grupo)
+            usuario.save()
 
             myusuario = Usuario()
             myusuario.id = usuario
@@ -57,10 +58,10 @@ def registrar_cliente(request):
             usuario.username = request.POST['username']
             usuario.password = make_password(request.POST['password1'])
             usuario.is_active = True
-            # perfil = Group.objects.get(name="Estudiantes")  # carga un perfil de tipo usuario
+            grupo = Group.objects.get(name="Cliente") # carga el grupo
             usuario.save()
-            # usuario.groups.add(perfil)
-            # usuario.save()
+            usuario.groups.add(grupo)
+            usuario.save()
 
             myusuario = Cliente()
             myusuario.id = usuario
@@ -92,5 +93,25 @@ def login(request):
 
     return render(request, 'main/login.html' )
 
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect("/")    
+
 def principal(request):
     return render(request, 'main/principal.html')
+
+def restringir(User):
+     if User.groups.filter(id = STATIC_ROLS['Clientes']).exists():
+         return True
+     elif User.groups.filter(id=STATIC_ROLS['Usuarios']).exists():
+         return False
+     else:
+        return True
+
+def restaurante(request):
+	
+	# @user_passes_test(restringir)
+	# return render(request, 'main/restaurante.html')
+		
+	# @user_passes_test(restringir)
+	return render(request, 'main/restaurante-user.html')	

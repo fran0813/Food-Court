@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
 body{
     background: url(../img/principal.png);
     background-repeat: no-repeat;
@@ -28,3 +30,26 @@ div .navegar{
 	background-color: #FFFFFF;
 }
 
+.titulo{
+	font-family: 'Fjalla One', sans-serif;
+	font-size: 55px;
+}
+
+.btn-link-1.btn-link-1-facebook { background: #4862a3; }
+.btn-link-1.btn-link-1-twitter { background: #55acee; }
+
+a, a:hover, a:focus {
+	color: #F24906;
+	text-decoration: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+.btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active { outline: 0; opacity: 0.6; color: #fff; }
+
+a {
+	color: #fff;
+}
+
+.colorn{
+	color: #0D28AF;
+}

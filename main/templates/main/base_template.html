@@ -30,10 +30,10 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a class="white" href="#">Restaurante</a></li>
+                        <li><a class="white" href="{% url 'restaurante' %}">Restaurante</a></li>
                         <li><a class="white" href="#">Contactenos</a></li>
                         <li><a class="white" href="#">Perfil</a></li>
-                        <li class="text-right"><a class="white " href="#">Salir</a></li>
+                        <li class="text-right"><a class="white " href="{% url 'logout' %}">Salir</a></li>
                     </ul>
                 </div>
             </div>
@@ -43,6 +43,14 @@
 
     {% block content %}
     {% endblock %} 
+
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; Francisco Navas.  </p>
+        </footer>
+
+    </div><!-- /.container -->
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
