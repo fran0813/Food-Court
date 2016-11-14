@@ -6,17 +6,25 @@ body{
 }
 
 div .titulo-q{
-    color: #000000;
+    color: #B91414;
 }
 
 div .letra-q{
-    color: #1800FF;
+    color: #6D6D6D;
 }
 
 div .navegar{
-    background-color: #F24906;
+    background-color: #B91414;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+
 }
 
-div .white{
-    color: #FFFFFF;
+.white{
+	color: #FFFFFF;
 }
+
+.backwhite{
+	background-color: #FFFFFF;
+}
+

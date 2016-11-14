@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Usuario(models.Model):
-	id = models.OneToOneField(User, primary_key=True, db_column='id')
+	id = models.OneToOneField(User, primary_key=True, db_column='idusuarios')
 	telefono = models.IntegerField( null = True, db_column='telefono' )
 	direccion = models.CharField(max_length = 45, db_column='direccion')
 	documento = models.IntegerField( db_column='documento')
@@ -14,7 +14,7 @@ class Usuario(models.Model):
 		managed  = False
 
 class Cliente(models.Model):
-	id = models.OneToOneField(User, primary_key=True, db_column='id')
+	id = models.OneToOneField(User, primary_key=True, db_column='idclientes')
 	telefono = models.IntegerField( null = True, db_column='telefono' )
 	direccion = models.CharField(max_length = 145, db_column='direccion')
 	documento = models.IntegerField( db_column='documento')
