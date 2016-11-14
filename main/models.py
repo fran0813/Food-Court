@@ -13,6 +13,9 @@ class Usuario(models.Model):
 		db_table = 'usuarios'
 		managed  = False
 
+	def __str__(self):
+		return '{}'.format(self.id)
+
 class Cliente(models.Model):
 	id = models.OneToOneField(User, primary_key=True, db_column='idclientes')
 	telefono = models.IntegerField( null = True, db_column='telefono' )
@@ -23,17 +26,26 @@ class Cliente(models.Model):
 		db_table = 'clientes'
 		managed  = False
 
+	def __str__(self):
+		return '{}'.format(self.id)
+
 class Restaurante(models.Model):
+	id = models.IntegerField( primary_key=True, db_column='idrestaurante')
 	nombre = models.CharField(max_length = 45, db_column='nombre')
 	telefono = models.CharField(max_length = 45, db_column='telefono')
 	direccion = models.CharField(max_length = 45, db_column='direccion')
 	sitioweb = models.CharField(max_length = 45, db_column='sitioweb')
 	restaurante_cliente = models.ForeignKey(Cliente , db_column='restaurante_cliente')
+	informacion = models.TextField( db_column='informacion')
+	image = models.ImageField(upload_to='img/', default="../static/img/icono_perfil.png", db_column='imagen')
 
 
 	class Meta:
 		db_table = 'restaurante'
 		managed  = False
+
+	def __str__(self):
+		return '{}'.format(self.nombre)
 
 class Usuario_Restaurante(models.Model):
 	usuario_restaurante_usuario = models.ForeignKey(Usuario, db_column='usuarios_restaurante_usuarios')

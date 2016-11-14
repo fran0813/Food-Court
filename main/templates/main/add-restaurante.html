@@ -27,14 +27,14 @@
 			                </tr>  
 			                </thead>  	
 			               
-			                  {% for restauran in user.cliente.restaurante_set.all %}
+			                  <!-- {% for tasks in user.contributors.tasks_set.all %} -->
 			                  <tbody>
 								<tr>
-								<td>{{ restauran.nombre }}</td>
+								<td>{{ tasks.description }}</td>
 								<td><a class="btn btn-primary" href="#">Editar</a> <a class="btn btn-danger" href="#">Borrar</a></td> 
 			                    </tr>
 			                  </tbody>
-			                  {% endfor %}
+			                  <!-- {% endfor %} -->
 			            </table>
 			            </div>
 			            </div>	       
@@ -43,31 +43,7 @@
 
             {% endif %}
 			{% if request.user|has_group:"Usuarios" %}
-			<div class="col-md-12">    
-			        <div class="panel">
-			        	<div class="panel-body">
-			            <div class="table-responsive">
-			        	<table class="table table-bordered table-hover table-striped">
-			                <thead>
-			                <tr>
-			                  <th>Tus Restaurantes</th>
-			                  <th>.</th>
-			                </tr>  
-			                </thead>  	
-			               
-			                  {% for restaurant in restaurante %}
-			                  <tbody>
-								<tr>
-								<td>{{ restaurant.nombre }}</td>
-								<td><a class="btn btn-primary" href="#">Ver</a></td> 
-			                    </tr>
-			                  </tbody>
-			                  {% endfor %}
-			            </table>
-			            </div>
-			            </div>	       
-			        </div>
-			        </div> 
+			:(
             {% endif %}
 
         <hr class="divider">

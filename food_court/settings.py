@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'main.templatetags'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -120,5 +121,3 @@ STATIC_URL = '/static/'
 
 #Directorio donde se almacenaran archivos css
 STATICFILES_DIRS = [ BASE_DIR + '/static' ]
-
-STATIC_ROLS = {'Clientes': 1, 'Usuarios': 2}

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User, Group
 from models import *
 from django.template import RequestContext
 from validator import *
-from food_court.settings import STATIC_ROLS
 
 def index(request):
     return render(request, 'main/index.html')
@@ -99,19 +98,11 @@ def logout(request):
 
 def principal(request):
     return render(request, 'main/principal.html')
-
-def restringir(User):
-     if User.groups.filter(id = STATIC_ROLS['Clientes']).exists():
-         return True
-     elif User.groups.filter(id=STATIC_ROLS['Usuarios']).exists():
-         return False
-     else:
-        return True
-
+       
 def restaurante(request):
-	
-	# @user_passes_test(restringir)
-	# return render(request, 'main/restaurante.html')
-		
-	# @user_passes_test(restringir)
-	return render(request, 'main/restaurante-user.html')	
+    user = User.objects.get( id = request.user.id )
+    restaurante = Restaurante.objects.filter()
+    return render(request, 'main/restaurante.html', { 'user': user, 'restaurante': restaurante })
+
+def add_restaurante(request):
+    return render(request, 'main/add-restaurante.html' )
