@@ -1,49 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'main/base_template.html' %}
+{% block title %} Inicio {% endblock %}
 
-    <title>Principal</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="my/css/slider.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-<body>
-    <!-- NAVBAR
-    ================================================== -->
-    <div class="container">
-
-        <nav class="navegar navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0px;">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Food-Court</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Perfil</a></li>
-                        <li><a href="#">salir</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-    </div>
+{%  block content %}
 
     <!-- Use a container to wrap the slider, the purpose is to enable slider to always fit width of the wrapper while window resize -->
     <div class="container slider-tamaño">
@@ -56,16 +14,16 @@
             <div u="slides" style="position: absolute; left: 0px; top: 0px; width: 1140px; height: 442px;
             overflow: hidden;">
                 <div>
-                    <img u="image" src2="my/img/img1.jpg" />
+                    <img u="image" src2="../../../static/my/img/img1.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="my/img/img2.jpg" />
+                    <img u="image" src2="../../../static/my/img/img2.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="my/img/img3.jpg" />
+                    <img u="image" src2="../../../static/my/img/img3.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="my/img/img4.jpg" />
+                    <img u="image" src2="../../../static/my/img/img4.jpg" />
                 </div>
             </div>
             
@@ -85,40 +43,18 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div class="container marketing white.">
+    <div class="container backwhite">
 
-        <hr class="featurette-divider">
+        <hr class="divider">
 
-        <div class="row featurette">
+        <div class="row">
             <div class="col-md-7">
-                <h2 class="featurette-heading titulo-q"><b>Que es?</b></h2>
+                <h2 class="titulo-q"><b>Quienes somos?</b></h2>
                 <p class="lead letra-q">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam distinctio earum quia sapiente asperiores laborum repudiandae repellendus doloribus deleniti dicta porro et, officiis maiores animi odio modi, eaque explicabo dolor.</p>
             </div>
-            <div class="col-md-5">
-                <img src="my/img/logo-app.png" width="100%" height="100%" alt="No found">
+            <div class="col-md-5 ">
+                <img src="../../../static/my/img/logo-app.png" width="100%" height="100%" alt="No found">
             </div>
         </div>
-
-        <!-- FOOTER -->
-        <footer>
-            <p class="pull-right"><a href="#">Back to top</a></p>
-            <p>&copy; Francisco Navas. &middot; <a href="#">Contactenos</a> &middot; </p>
-        </footer>
-
-    </div><!-- /.container -->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="jquery/jquery-1.9.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="my/js/docs.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="my/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="my/js/slider.js"></script>
-
-    <!-- jssor slider scripts-->
-    <!-- use jssor.slider.debug.js for debug -->
-    <script type="text/javascript" src="my/js/jssor.slider.mini.js"></script>
-</body>
-</html>
+        
+{% endblock %}

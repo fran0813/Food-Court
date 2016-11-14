@@ -21,8 +21,18 @@
 
 	<center>
 		<div class="container logo">
-		  <img class="img-responsive" src="{% static 'my/img/logo-app.png' %}">
+		  <a href="{% url 'login' %}"><img class="img-responsive" src="{% static 'my/img/logo-app.png' %}"></a>
 		</div>
+		<br />
+		<div class="col-md-12">
+			<div class="col-md-6">
+		  		<a href="{% url 'registrar-usuario' %}"><img class="img-responsive" src="{% static 'my/img/users.png' %}" width="30%" height="30%"></a><p>Usuarios</p> 
+		  	</div>
+			<div class="col-md-6">
+		  		<a href="{% url 'registrar-cliente' %}"><img class="img-responsive" src="{% static 'my/img/client.png' %}" width="30%" height="30%"></a><p>Clientes</p>
+		  	</div>
+		</div>
+
 	</center>
 
 	
