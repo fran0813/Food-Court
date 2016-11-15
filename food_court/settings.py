@@ -72,7 +72,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'foodcourt',
         'USER': 'postgres',
-        'PASSWORD': '0000',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '5432',
 
