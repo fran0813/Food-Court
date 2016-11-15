@@ -56,10 +56,11 @@ class Usuario_Restaurante(models.Model):
 		managed  = False
 
 class Platillo(models.Model):
+	id = models.AutoField( primary_key=True, db_column='idplatillos')
 	nombre = models.CharField(max_length = 45, db_column='nombre')
 	precio = models.IntegerField( db_column='precio')
-	comentario = models.CharField(max_length = 100, db_column='comentario')
-	restaurante_platillo = models.ForeignKey(Cliente , db_column='restaurante_platillo')
+	detalle = models.CharField(max_length = 100, db_column='detalle')
+	restaurante_platillo = models.ForeignKey(Restaurante , db_column='restaurante_platillos')
 
 
 	class Meta:

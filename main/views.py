@@ -1,10 +1,9 @@
 # -*- coding:utf-8 -*-
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
 from models import *
-from forms import RestauranteForm
+from forms import RestauranteForm, PlatilloForm
 from django.template import RequestContext
 from validator import *
 
@@ -87,7 +86,7 @@ def login(request):
         if validators.is_valid():
 
             auth.login(request, validators.acceso)  # Crear una sesion
-            return HttpResponseRedirect('/principal')
+            return redirect('/principal')
 
         else:
             return render(request, 'main/login.html', {'error': validators.getMessage()} )
@@ -96,7 +95,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect("/")    
+    return redirect("/")    
 
 def principal(request):
     return render(request, 'main/principal.html')
@@ -117,6 +116,57 @@ def add_restaurante(request):
         form = RestauranteForm()
     return render(request, 'main/add-restaurante.html', { 'form' : form } )
 
+def edit_restaurante(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    if request.method == "POST":
+        form = RestauranteForm(request.POST, instance=restaurante)
+        if form.is_valid():
+            restaurante = form.save(commit=False)
+            restaurante.restaurante_cliente_id = request.user.id
+            restaurante.save()
+            return redirect('restaurante-detalle', pk=restaurante.pk)
+    else:
+        form = RestauranteForm(instance=restaurante)
+    return render(request, 'main/edit-restaurante.html', {'form': form, 'restaurante':restaurante})
+
+def delete_restaurante(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    restaurante.delete()
+    return redirect('restaurante')
+
 def restaurante_detail(request, pk):
     restaurante = get_object_or_404(Restaurante, pk=pk)
     return render(request, 'main/restaurante-detail.html', {'restaurante': restaurante })
+
+def menu_list(request):
+    platillo = Platillo.objects.filter()
+    return render(request, 'main/menu.html', { 'platillo': platillo })    
+
+def add_menu(request):
+    restaurante = Restaurante.objects.filter(id=request.user.id)
+    if request.method == "POST":
+        form = PlatilloForm(request.POST)
+        if form.is_valid():
+            menu = form.save(commit=False)
+            menu.save()
+            return redirect('list-menu')
+    else:
+        form = PlatilloForm()
+    return render(request, 'main/add-menu.html', { 'form' : form } )
+
+def edit_menu(request, pk):
+    menu = get_object_or_404(Platillo, pk=pk)
+    if request.method == "POST":
+        form = PlatilloForm(request.POST, instance=menu)
+        if form.is_valid():
+            menu = form.save(commit=False)
+            menu.save()
+            return redirect('list-menu')
+    else:
+        form = PlatilloForm(instance=menu)
+    return render(request, 'main/edit-menu.html', {'form': form, 'menu':menu})
+
+def delete_menu(request, pk):
+    menu = get_object_or_404(Platillo, pk=pk)
+    menu.delete()
+    return redirect('list-menu')

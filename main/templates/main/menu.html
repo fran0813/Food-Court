@@ -12,7 +12,7 @@
     <div class="container backwhite">
             {% if request.user|has_group:"Cliente" %}
             		<div class="col-md-12">
-			        	<a class="btn btn-primary pull-right" href="{% url 'add-restaurante' %}"><i class="fa fa-plus" aria-hidden="true"></i><br>Agregar</a></h3>
+			        	<a class="btn btn-primary pull-right" href="{% url 'add-menu' %}"><i class="fa fa-plus" aria-hidden="true"></i><br>Agregar Platillo</a></h3>
 			        </div>
 			        
 			        <div class="col-md-12">    
@@ -22,21 +22,18 @@
 			        	<table class="table table-bordered table-hover table-striped">
 			                <thead>
 			                <tr>
-			                  <th>Tus Restaurantes</th>
+			                  <th>Tu Menú</th>
 			                  <th>Funciones</th>
-			                  <th>Menú</th>
 			                </tr>  
 			                </thead>  	
 			               
-			                  {% for restauran in user.cliente.restaurante_set.all %}
+			                  {% for menu in platillo %}
 			                  <tbody>
 								<tr>
-								<td>{{ restauran.nombre }}</td>
-								<td><a class="btn btn-primary" href="{% url 'restaurante-detalle' pk=restauran.pk %}" >Ver</a>
-								<a class="btn btn-primary" href="{% url 'edit-restaurante' pk=restauran.pk %}" >Editar</a>
-								<a class="btn btn-danger" href="{% url 'delete-restaurante' pk=restauran.pk %}">Borrar</a></td>
-								<td><a class="btn btn-primary" href="{% url 'list-menu' %}" >Ver Menú</a>
-								<a class="btn btn-primary" href="{% url 'add-menu' %}" >Agregar Platillo</a></td> 
+								<td>{{ menu.nombre }}</td>
+								<td>
+								<a class="btn btn-primary" href="{% url 'edit-menu' pk=menu.pk %}" >Editar</a>
+								<a class="btn btn-danger" href="{% url 'delete-menu' pk=menu.pk %}">Borrar</a></td>
 			                    </tr>
 			                  </tbody>
 			                  {% endfor %}
@@ -55,16 +52,16 @@
 			        	<table class="table table-bordered table-hover table-striped">
 			                <thead>
 			                <tr>
-			                  <th>Restaurantes Disponibles</th>
-			                  <th>.</th>
+			                  <th>Menú</th>
+			                  
 			                </tr>  
 			                </thead>  	
 			               
-			                  {% for restaurant in restaurante %}
+			                  {% for plati in platillo %}
 			                  <tbody>
 								<tr>
-								<td>{{ restaurant.nombre }}</td>
-								<td><a class="btn btn-primary" href="{% url 'restaurante-detalle' pk=restaurant.pk %}" >Ver</a></td> 
+								<td>{{ plati.nombre }}, {{ plati.precio }}</td>
+								
 			                    </tr>
 			                  </tbody>
 			                  {% endfor %}

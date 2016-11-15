@@ -1,0 +1,36 @@
+{% extends 'main/base_template.html' %}
+{% block title %} Restaurante {% endblock %}
+{% load user_tags %}
+
+{%  block content %}
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container backwhite">
+            {% if request.user|has_group:"Cliente" %}
+			        <div class="col-md-12">    
+				        <div class="panel">
+				        	<h1>Agregar Nuevo Platillo</h1>
+				        	<br>
+				        	<div class="col-md-8">
+							    <form method="POST" class="post-form">{% csrf_token %}
+							        {{ form.as_p }}
+							        <button type="submit" class="save btn btn-primary">Guardar</button>
+							        <br><br>
+							    </form>
+						    </div>    
+				        </div>
+			        </div>
+
+
+            {% endif %}
+			{% if request.user|has_group:"Usuarios" %}
+			:(
+            {% endif %}
+
+        <hr class="divider">
+
+{% endblock %}
