@@ -11,7 +11,8 @@ def index(request):
     return render(request, 'main/index.html')
 
 def perfil(request):
-    return render(request, 'main/perfil.html')
+    user = User.objects.get(id=request.user.id)
+    return render(request, 'main/perfil.html', {'user': user} )
 
 def mapa(request):
     return render(request, 'main/mapa.html')
