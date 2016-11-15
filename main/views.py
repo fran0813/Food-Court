@@ -11,6 +11,15 @@ from validator import *
 def index(request):
     return render(request, 'main/index.html')
 
+def perfil(request):
+    return render(request, 'main/perfil.html')
+
+def mapa(request):
+    return render(request, 'main/mapa.html')
+
+def contacto(request):
+    return render(request, 'main/contactenos.html')
+
 def registrar_usuario(request):
 
     error = False

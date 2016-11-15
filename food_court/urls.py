@@ -7,7 +7,10 @@ from main.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^$', index, name='index' ), #/
+    url(r'^$', index, name='index' ),
+    url(r'^perfil$', perfil, name='perfil' ), 
+    url(r'^mapa$', mapa, name='mapa' ),
+    url(r'^contacto$', contacto, name='contacto' ), 
     url(r'^login$', login , name='login' ),
     url(r'^logout$', logout, name = 'logout' ),
     url(r'^registrar$', registrar_usuario, name='registrar-usuario' ),
@@ -16,6 +19,7 @@ urlpatterns = [
     url(r'^restaurante$', restaurante , name='restaurante' ),
     url(r'^restaurante/add$', add_restaurante , name='add-restaurante' ),
     url(r'^restaurante/(?P<pk>[0-9]+)/$', restaurante_detail, name='restaurante-detalle')
+
 
 ]
 

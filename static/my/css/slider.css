@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+@import url('https://fonts.googleapis.com/css?family=Oleo+Script');
 
 body{
-    background: url(../img/principal.png);
+    background: url(../img/principal2.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
@@ -24,6 +25,7 @@ div .navegar{
 
 .white{
 	color: #FFFFFF;
+    padding-top: 7px;
 }
 
 .backwhite{
@@ -52,4 +54,22 @@ a {
 
 .colorn{
 	color: #0D28AF;
+}
+
+.colaboradores{
+    font-size:  80px;
+    font-family: 'Oleo Script', cursive;
+}
+
+.circulo2{
+    border-radius: 50%;
+}
+
+.web{
+    color: #193DB4;
+}
+
+.fuente{
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 20px;
 }
