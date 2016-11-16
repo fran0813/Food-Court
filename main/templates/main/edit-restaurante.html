@@ -18,6 +18,8 @@
 				        	<div class="col-md-8">
 							    <form method="POST" class="post-form">{% csrf_token %}
 							        {{ form.as_p }}
+							        <label class="control-label">Imagen</label>
+                                    <input type="file" name="imagen"  class="filestyle" data-buttonText="Select a File">
 							        <button type="submit" class="save btn btn-primary">Guardar</button>
 							        <br><br>
 							    </form>
