@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
-from models import *
+from models import Usuario, Cliente, Restaurante, Platillo
 from forms import RestauranteForm, PlatilloForm
 from django.template import RequestContext
 from validator import *
@@ -13,8 +13,9 @@ def index(request):
 
 @login_required(login_url="/")
 def perfil(request):
-    usuario = User.objects.get(id=request.user.id)
-    return render(request, 'main/perfil.html', {'user': usuario} )
+    usuario = Cliente.objects.get(id=request.user.id)
+    usuario1 = Usuario.objects.get(id=request.user.id)
+    return render(request, 'main/perfil.html', {'user': usuario, 'user2':usuario1} )
 
 @login_required(login_url="/")
 def mapa(request):
@@ -51,7 +52,7 @@ def registrar_usuario(request):
             myusuario.telefono = request.POST['telefono']
             myusuario.save()
 
-            return render(request, 'main/login.html', {'success': True})
+            return redirect('login')
         else:
             return render(request, 'main/registrar.html', {'error': validators.getMessage() } )
         # Agregar el usuario a la base de datos
@@ -84,7 +85,7 @@ def registrar_cliente(request):
             myusuario.telefono = request.POST['telefono']
             myusuario.save()
 
-            return render(request, 'main/login.html', {'success': True})
+            return redirect('login')
         else:
             return render(request, 'main/registrar-clientes.html', {'error': validators.getMessage() } )
         # Agregar el usuario a la base de datos
@@ -123,10 +124,11 @@ def restaurante(request):
 @login_required(login_url="/")
 def add_restaurante(request):
     if request.method == "POST":
-        form = RestauranteForm(request.POST)
+        form = RestauranteForm(request.POST, request.FILES)
         if form.is_valid():
             restaurante = form.save(commit=False)
             restaurante.restaurante_cliente_id = request.user.id
+            # restaurante.image = request.FILES.get('imagen')
             restaurante.save()
             return redirect('restaurante-detalle', pk=restaurante.pk)
     else:
@@ -137,10 +139,12 @@ def add_restaurante(request):
 def edit_restaurante(request, pk):
     restaurante = get_object_or_404(Restaurante, pk=pk)
     if request.method == "POST":
+        # import pdb; pdb.set_trace();
         form = RestauranteForm(request.POST, instance=restaurante)
         if form.is_valid():
             restaurante = form.save(commit=False)
             restaurante.restaurante_cliente_id = request.user.id
+            restaurante.image = request.FILES.get('imagen')
             restaurante.save()
             return redirect('restaurante-detalle', pk=restaurante.pk)
     else:
