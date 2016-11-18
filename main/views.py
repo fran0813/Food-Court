@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
 from models import Usuario, Cliente, Restaurante, Platillo
@@ -7,15 +7,19 @@ from forms import RestauranteForm, PlatilloForm
 from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+
 
 def index(request):
     return render(request, 'main/index.html')
 
 @login_required(login_url="/")
 def perfil(request):
-    usuario = Cliente.objects.get(id=request.user.id)
-    usuario1 = Usuario.objects.get(id=request.user.id)
-    return render(request, 'main/perfil.html', {'user': usuario, 'user2':usuario1} )
+    # usuario = Cliente.objects.get(id=request.user.id)
+    # usuario1 = Usuario.objects.get(id=request.user.id)
+    print request.user.last_name
+    # print usuario.telefono
+    return render(request, 'main/perfil.html', {'user': request.user, 'user2': ''} )
 
 @login_required(login_url="/")
 def mapa(request):
@@ -112,6 +116,7 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect("/")    
+
 @login_required(login_url="/")
 def principal(request):
     return render(request, 'main/principal.html')

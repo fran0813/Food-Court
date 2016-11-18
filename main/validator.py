@@ -46,7 +46,7 @@ class FormRegistroValidator(Validator):
     def is_valid(self):
         if not super(FormRegistroValidator, self).is_valid():
             return False
-        #validar que las contraseñas sehan iguales
+        #validar que las contraseñas sean iguales
         if not self._post['password1'] == self._post['password2']:
             self._message = 'Las contraseñas no  coinciden'
             return False

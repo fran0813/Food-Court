@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^menu/(?P<pk>[0-9]+)/edit$', edit_menu, name='edit-menu'),
     url(r'^menu/(?P<pk>\d+)/remove/$', delete_menu, name='delete-menu'),
 
+   
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
