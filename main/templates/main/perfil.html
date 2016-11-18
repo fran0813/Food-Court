@@ -1,6 +1,5 @@
 {% extends 'main/base_template.html' %}
 {% block title %} Perfil {% endblock %}
-{% load user_tags %}
 
 {%  block content %}
 
@@ -16,7 +15,10 @@
 	    		<h1 class="colaboradores">Perfil</h1>
 	    	</center>
 		</div>
+<<<<<<< HEAD
 	{% if request.user|has_group:"Cliente" %}
+=======
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 	<div class="container">
 		<div class="col-md-12">
 			<div class="col-md-5 ">
@@ -24,7 +26,11 @@
 					<label for="usuario">Usuario</label>
 				</div>
 			<div class="row">
+<<<<<<< HEAD
 				<input type="text" class="form-control" name="usuario" id="usuario" placeholder="{{ user.username }}">
+=======
+				<input type="text" class="form-control" name="usuario" id="usuario" placeholder="{{ user.id.username }}">
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 			</div>
 			</div>
 				<div class="col-md-5 col-md-offset-1">
@@ -32,7 +38,11 @@
 						<label for="correo">Correo</label>
 					</div>
 				<div class="row">
+<<<<<<< HEAD
 					<input type="correo" class="form-control" name="correo" id="correo" placeholder="{{ user.email }}">
+=======
+					<input type="correo" class="form-control" name="correo" id="correo" placeholder="{{ user.id.email }}">
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 				</div>
 			</div>	
 		</div>
@@ -54,7 +64,11 @@
 					<label for="nombres">Nombre</label>
 				</div>
 				<div class="row">
+<<<<<<< HEAD
 					<input type="text" class="form-control" name="nombres" id="nombres" placeholder="{{ user.first_name }}">
+=======
+					<input type="text" class="form-control" name="nombres" id="nombres" placeholder="{{ user.id.first_name }}">
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 				</div>
 			</div>
 			<div class="col-md-5 col-md-offset-1">
@@ -62,7 +76,11 @@
 					<label for="apellidos">Apellidos</label>
 				</div>
 				<div class="row">
+<<<<<<< HEAD
 					<input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="{{ user.last_name }}">
+=======
+					<input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="{{ user.id.last_name }}">
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 				</div>
 			</div>	
 		</div>
@@ -78,7 +96,11 @@
 					<label for="telefono">Telefono</label>
 				</div>
 			<div class="row">
+<<<<<<< HEAD
 				<input type="text" class="form-control" name="telefono" id="telefono" placeholder="{{ user2.telefono }}">
+=======
+				<input type="text" class="form-control" name="telefono" id="telefono" placeholder="{{ user.telefono }}">
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 			</div>
 			</div>
 				<div class="col-md-5 col-md-offset-1">
@@ -86,13 +108,18 @@
 						<label for="direccion">Dirección</label>
 					</div>
 				<div class="row">
+<<<<<<< HEAD
 					<input type="text" class="form-control" name="direccion" id="direccion" placeholder="{{ usuario.direccion }}">
+=======
+					<input type="text" class="form-control" name="direccion" id="direccion" placeholder="{{ user.direccion }}">
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 				</div>
 			</div>	
 		</div> -->
 
 
 		</div>
+<<<<<<< HEAD
 		{% endif %}
 
 		{% if request.user|has_group:"Usuarios" %}
@@ -174,6 +201,8 @@
 		</div>
 		{% endif %}
 
+=======
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 		
 	<br>
 	<br>

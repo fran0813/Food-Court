@@ -7,19 +7,37 @@ from forms import RestauranteForm, PlatilloForm
 from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from django.http import HttpResponse
 
+=======
+from food_court.settings import STATIC_ROLS
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 
 def index(request):
     return render(request, 'main/index.html')
 
 @login_required(login_url="/")
 def perfil(request):
+<<<<<<< HEAD
     # usuario = Cliente.objects.get(id=request.user.id)
     # usuario1 = Usuario.objects.get(id=request.user.id)
     print request.user.last_name
     # print usuario.telefono
     return render(request, 'main/perfil.html', {'user': request.user, 'user2': ''} )
+=======
+    # import pdb; pdb.set_trace()
+    if User.objects.filter(id=request.user.id, groups = STATIC_ROLS['Cliente']).exists():   
+        usuario = Cliente.objects.get(id=request.user.id)
+        return render(request, 'main/perfil.html', {'user': usuario } )
+
+    elif User.objects.filter(id=request.user.id, groups = STATIC_ROLS['Usuarios']).exists():
+        usuario = Usuario.objects.get(id=request.user.id)
+        return render(request, 'main/perfil.html', {'user': usuario } )
+
+    else:
+        return render(request, 'main/perfil.html')
+>>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 
 @login_required(login_url="/")
 def mapa(request):

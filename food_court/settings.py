@@ -72,7 +72,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'foodcourt',
         'USER': 'postgres',
-        'PASSWORD': '123456',
+        'PASSWORD': '0000',
         'HOST': '127.0.0.1',
         'PORT': '5432',
 
@@ -125,3 +125,5 @@ STATICFILES_DIRS = [ BASE_DIR + '/static' ]
 MEDIA_ROOT = BASE_DIR + '/media'
 
 MEDIA_URL = '/media/' # verificar URL's en urls.py
+
+STATIC_ROLS = {'Cliente': 1, 'Usuarios': 2}
