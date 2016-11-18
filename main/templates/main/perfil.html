@@ -1,6 +1,5 @@
 {% extends 'main/base_template.html' %}
 {% block title %} Perfil {% endblock %}
-{% load user_tags %}
 
 {%  block content %}
 
@@ -16,8 +15,6 @@
 	    		<h1 class="colaboradores">Perfil</h1>
 	    	</center>
 		</div>
-	{% if request.user|has_group:"Cliente" %}
-	{% for us in user %}
 	<div class="container">
 		<div class="col-md-12">
 			<div class="col-md-5 ">
@@ -25,7 +22,7 @@
 					<label for="usuario">Usuario</label>
 				</div>
 			<div class="row">
-				<input type="text" class="form-control" name="usuario" id="usuario" placeholder="{{ us.username }}">
+				<input type="text" class="form-control" name="usuario" id="usuario" placeholder="{{ user.id.username }}">
 			</div>
 			</div>
 				<div class="col-md-5 col-md-offset-1">
@@ -33,7 +30,7 @@
 						<label for="correo">Correo</label>
 					</div>
 				<div class="row">
-					<input type="correo" class="form-control" name="correo" id="correo" placeholder="{{ us.email }}">
+					<input type="correo" class="form-control" name="correo" id="correo" placeholder="{{ user.id.email }}">
 				</div>
 			</div>	
 		</div>
@@ -55,7 +52,7 @@
 					<label for="nombres">Nombre</label>
 				</div>
 				<div class="row">
-					<input type="text" class="form-control" name="nombres" id="nombres" placeholder="{{ us.first_name }}">
+					<input type="text" class="form-control" name="nombres" id="nombres" placeholder="{{ user.id.first_name }}">
 				</div>
 			</div>
 			<div class="col-md-5 col-md-offset-1">
@@ -63,7 +60,7 @@
 					<label for="apellidos">Apellidos</label>
 				</div>
 				<div class="row">
-					<input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="{{ us.last_name }}">
+					<input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="{{ user.id.last_name }}">
 				</div>
 			</div>	
 		</div>
@@ -79,7 +76,7 @@
 					<label for="telefono">Telefono</label>
 				</div>
 			<div class="row">
-				<input type="text" class="form-control" name="telefono" id="telefono" placeholder="{{ us.telefono }}">
+				<input type="text" class="form-control" name="telefono" id="telefono" placeholder="{{ user.telefono }}">
 			</div>
 			</div>
 				<div class="col-md-5 col-md-offset-1">
@@ -87,97 +84,13 @@
 						<label for="direccion">Dirección</label>
 					</div>
 				<div class="row">
-					<input type="text" class="form-control" name="direccion" id="direccion" placeholder="{{ us.direccion }}">
+					<input type="text" class="form-control" name="direccion" id="direccion" placeholder="{{ user.direccion }}">
 				</div>
 			</div>	
 		</div>
 
 
 		</div>
-		{% endfor %}
-		{% endif %}
-
-		{% if request.user|has_group:"Usuarios" %}
-		{% for us in user %}
-	<div class="container">
-		<div class="col-md-12">
-			<div class="col-md-5 ">
-				<div class="row">
-					<label for="usuario">Usuario</label>
-				</div>
-			<div class="row">
-				<input type="text" class="form-control" name="usuario" id="usuario" placeholder="{{ us.username }}">
-			</div>
-			</div>
-				<div class="col-md-5 col-md-offset-1">
-					<div class="row">
-						<label for="correo">Correo</label>
-					</div>
-				<div class="row">
-					<input type="correo" class="form-control" name="correo" id="correo" placeholder="{{ us.email }}">
-				</div>
-			</div>	
-		</div>
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-
-		<div class="col-md-12">
-			<div class="col-md-5 ">
-				<div class="row">
-					<label for="nombres">Nombre</label>
-				</div>
-				<div class="row">
-					<input type="text" class="form-control" name="nombres" id="nombres" placeholder="{{ us.first_name }}">
-				</div>
-			</div>
-			<div class="col-md-5 col-md-offset-1">
-				<div class="row">
-					<label for="apellidos">Apellidos</label>
-				</div>
-				<div class="row">
-					<input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="{{ us.last_name }}">
-				</div>
-			</div>	
-		</div>
-
-		<br>
-		<br>
-		<br>
-		<br>
-
-		<div class="col-md-12">
-			<div class="col-md-5 ">
-				<div class="row">
-					<label for="telefono">Telefono</label>
-				</div>
-			<div class="row">
-				<input type="text" class="form-control" name="telefono" id="telefono" placeholder="{{ us.telefono }}">
-			</div>
-			</div>
-				<div class="col-md-5 col-md-offset-1">
-					<div class="row">
-						<label for="direccion">Dirección</label>
-					</div>
-				<div class="row">
-					<input type="text" class="form-control" name="direccion" id="direccion" placeholder="{{ us.direccion }}">
-				</div>
-			</div>	
-		</div>
-
-
-		</div>
-		{% endfor %}
-		{% endif %}
-
 		
 	<br>
 	<br>
