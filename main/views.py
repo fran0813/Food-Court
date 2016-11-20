@@ -8,6 +8,10 @@ from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd31fc2a6974442768d7e8a728075530499d50f5
 from food_court.settings import STATIC_ROLS
 
 def index(request):
@@ -27,6 +31,10 @@ def perfil(request):
 
     else:
         return render(request, 'main/perfil.html')
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd31fc2a6974442768d7e8a728075530499d50f5
 
 @login_required(login_url="/")
 def mapa(request):
@@ -130,7 +138,10 @@ def principal(request):
 
 @login_required(login_url="/")       
 def restaurante(request):
-    restaurante = Restaurante.objects.filter()
+    if request.user.groups.filter(id = 2 ).exists():
+        restaurante = Restaurante.objects.all()
+    else:
+        restaurante = Restaurante.objects.filter( restaurante_cliente_id = request.user.id )
     return render(request, 'main/restaurante.html', { 'restaurante': restaurante })
 
 @login_required(login_url="/")
@@ -176,20 +187,28 @@ def restaurante_detail(request, pk):
 
 @login_required(login_url="/")
 def menu_list(request):
-    platillo = Platillo.objects.filter()
+    if request.user.groups.filter(id = 1 ).exists():
+        user = Cliente.objects.get(id=request.user.id)
+        restaurante = Restaurante.objects.get( restaurante_cliente = user)
+        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante.id)
+    else:
+        import pdb; pdb.set_trace()
+        restaurante = Restaurante.objects.filter()
+        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante)
     return render(request, 'main/menu.html', { 'platillo': platillo })    
 
 @login_required(login_url="/")
 def add_menu(request):
+    
     restaurante = Restaurante.objects.filter(id=request.user.id)
     if request.method == "POST":
-        form = PlatilloForm(request.POST)
+        form = PlatilloForm(request.user, request.POST)
         if form.is_valid():
             menu = form.save(commit=False)
             menu.save()
             return redirect('list-menu')
     else:
-        form = PlatilloForm()
+        form = PlatilloForm(request.user)
     return render(request, 'main/add-menu.html', { 'form' : form } )
 
 @login_required(login_url="/")
