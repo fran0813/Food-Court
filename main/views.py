@@ -7,25 +7,16 @@ from forms import RestauranteForm, PlatilloForm
 from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from django.http import HttpResponse
 
-=======
 from food_court.settings import STATIC_ROLS
->>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
 
 def index(request):
     return render(request, 'main/index.html')
 
 @login_required(login_url="/")
 def perfil(request):
-<<<<<<< HEAD
-    # usuario = Cliente.objects.get(id=request.user.id)
-    # usuario1 = Usuario.objects.get(id=request.user.id)
-    print request.user.last_name
-    # print usuario.telefono
-    return render(request, 'main/perfil.html', {'user': request.user, 'user2': ''} )
-=======
+
     # import pdb; pdb.set_trace()
     if User.objects.filter(id=request.user.id, groups = STATIC_ROLS['Cliente']).exists():   
         usuario = Cliente.objects.get(id=request.user.id)
@@ -37,7 +28,7 @@ def perfil(request):
 
     else:
         return render(request, 'main/perfil.html')
->>>>>>> c397b775d2613c7a0b145c06c522fa5eed84818d
+
 
 @login_required(login_url="/")
 def mapa(request):
@@ -141,7 +132,10 @@ def principal(request):
 
 @login_required(login_url="/")       
 def restaurante(request):
-    restaurante = Restaurante.objects.filter()
+    if request.user.groups.filter(id = 2 ).exists():
+        restaurante = Restaurante.objects.all()
+    else:
+        restaurante = Restaurante.objects.filter( restaurante_cliente_id = request.user.id )
     return render(request, 'main/restaurante.html', { 'restaurante': restaurante })
 
 @login_required(login_url="/")
@@ -187,20 +181,28 @@ def restaurante_detail(request, pk):
 
 @login_required(login_url="/")
 def menu_list(request):
-    platillo = Platillo.objects.filter()
+    if request.user.groups.filter(id = 1 ).exists():
+        user = Cliente.objects.get(id=request.user.id)
+        restaurante = Restaurante.objects.get( restaurante_cliente = user)
+        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante.id)
+    else:
+        import pdb; pdb.set_trace()
+        restaurante = Restaurante.objects.filter()
+        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante)
     return render(request, 'main/menu.html', { 'platillo': platillo })    
 
 @login_required(login_url="/")
 def add_menu(request):
+    
     restaurante = Restaurante.objects.filter(id=request.user.id)
     if request.method == "POST":
-        form = PlatilloForm(request.POST)
+        form = PlatilloForm(request.user, request.POST)
         if form.is_valid():
             menu = form.save(commit=False)
             menu.save()
             return redirect('list-menu')
     else:
-        form = PlatilloForm()
+        form = PlatilloForm(request.user)
     return render(request, 'main/add-menu.html', { 'form' : form } )
 
 @login_required(login_url="/")

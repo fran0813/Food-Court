@@ -1,4 +1,3 @@
-# -*- coding:utf-8 -*-
 from django import forms
 
 from .models import Restaurante, Platillo
@@ -12,8 +11,8 @@ class RestauranteForm(forms.ModelForm):
         			'telefono': 'Telefono', 
         			'direccion': 'Direccion', 
         			'sitioweb': 'Sitio Web', 
-        			'informacion': 'Información', 
-        			# 'image': 'Seleccione una imágen' 
+        			'informacion': 'Informacion', 
+        			# 'image': 'Seleccione una imagen' 
         		  }
         widgets = { 'nombre': forms.TextInput(attrs={'class':'form-control'}),
         			'telefono': forms.TextInput(attrs={'class':'form-control'}),
@@ -31,7 +30,7 @@ class PlatilloForm(forms.ModelForm):
         fields = ('nombre', 'precio', 'detalle', 'restaurante_platillo' )
         labels = { 'nombre': 'Nombre del Platillo', 
         			'precio': 'Precio', 
-        			'detalle': 'Descripción', 
+        			'detalle': 'Descripcion', 
         			'restaurante_platillo' : 'Restaurante',
         		  }
         widgets = { 'nombre': forms.TextInput(attrs={'class':'form-control'}),
@@ -39,3 +38,7 @@ class PlatilloForm(forms.ModelForm):
         			'detalle': forms.TextInput(attrs={'class':'form-control'}),
         			'restaurante_platillo': forms.Select(attrs={'class':'form-control'}),
         		  }
+
+    def __init__(self, user, *args, **kwargs):
+        super(PlatilloForm, self).__init__(*args, **kwargs)
+        self.fields['restaurante_platillo'].queryset = Restaurante.objects.filter( restaurante_cliente_id = user.id )
