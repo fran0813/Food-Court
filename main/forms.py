@@ -39,6 +39,7 @@ class PlatilloForm(forms.ModelForm):
         			'restaurante_platillo': forms.Select(attrs={'class':'form-control'}),
         		  }
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
         super(PlatilloForm, self).__init__(*args, **kwargs)
         self.fields['restaurante_platillo'].queryset = Restaurante.objects.filter( restaurante_cliente_id = user.id )
