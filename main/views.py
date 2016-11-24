@@ -8,6 +8,13 @@ from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+<<<<<<< HEAD
+=======
+
+from django.core.urlresolvers import reverse
+from django.views.generic import *
+
+>>>>>>> b7519da6b192732fa9c86c5efa01c4a23614718e
 from food_court.settings import STATIC_ROLS
 
 def index(request):
@@ -209,6 +216,34 @@ def edit_menu(request, pk):
     else:
         form = PlatilloForm(request.user, instance=menu)
     return render(request, 'main/edit-menu.html', {'form': form, 'menu':menu})
+
+class MenuCreateView(CreateView):
+    model = Platillo
+    template_name = 'main/edit-menu.html'
+    success_message = 'Exactly'
+    form_class = PlatilloForm
+
+    def get_form_kwargs(self):
+        kwargs = super(MenuCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('list-menu')
+
+class MenuUpdateView(UpdateView):
+    model = Platillo
+    template_name = 'main/edit-menu.html'
+    success_message = 'Exactly'
+    form_class = PlatilloForm
+
+    def get_form_kwargs(self):
+        kwargs = super(MenuUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('list-menu')
 
 @login_required(login_url="/")
 def delete_menu(request, pk):
