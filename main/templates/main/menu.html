@@ -26,8 +26,7 @@
 			                  <th>Funciones</th>
 			                </tr>  
 			                </thead>  	
-			               
-			                  {% for menu in platillo %}
+			                  {% for menu in restaurante.platillo_set.all %}
 			                  <tbody>
 								<tr>
 								<td>{{ menu.nombre }}</td>
@@ -55,7 +54,9 @@
 			                  <th>Menú</th>
 			                  
 			                </tr>  
-			                </thead>  	
+			                </thead>  
+
+			                {{ platillo }}
 			               
 			                  {% for plati in platillo %}
 			                  <tbody>

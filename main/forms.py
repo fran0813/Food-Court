@@ -6,7 +6,8 @@ class RestauranteForm(forms.ModelForm):
 
     class Meta:
         model = Restaurante
-        fields = ('nombre', 'telefono', 'direccion', 'sitioweb', 'informacion' )
+        fields = ('__all__' )
+        exclude = ('restaurante_cliente',)
         labels = { 'nombre': 'Nombre del Restaurante', 
         			'telefono': 'Telefono', 
         			'direccion': 'Direccion', 
