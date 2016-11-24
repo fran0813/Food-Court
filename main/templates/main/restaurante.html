@@ -35,8 +35,8 @@
 								<td><a class="btn btn-primary" href="{% url 'restaurante-detalle' pk=restauran.pk %}" >Ver</a>
 								<a class="btn btn-primary" href="{% url 'edit-restaurante' pk=restauran.pk %}" >Editar</a>
 								<a class="btn btn-danger" href="{% url 'delete-restaurante' pk=restauran.pk %}">Borrar</a></td>
-								<td><a class="btn btn-primary" href="{% url 'list-menu' pk=restauran.pk %}" >Ver Menú</a>
-								<a class="btn btn-primary" href="{% url 'add-menu' pk=restauran.pk %}" >Agregar Platillo</a></td> 
+								<td><a class="btn btn-primary" href="{% url 'list-menu' %}" >Ver Menú</a>
+								<a class="btn btn-primary" href="{% url 'add-menu' %}" >Agregar Platillo</a></td> 
 			                    </tr>
 			                  </tbody>
 			                  {% endfor %}

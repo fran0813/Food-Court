@@ -23,19 +23,16 @@ urlpatterns = [
     url(r'^restaurante/(?P<pk>\d+)/remove/$', delete_restaurante, name='delete-restaurante'),
     url(r'^restaurante/(?P<pk>[0-9]+)/$', restaurante_detail, name='restaurante-detalle'),
 
-<<<<<<< HEAD
-    url(r'^menu/(?P<pk>[0-9]+)/$', menu_list , name='list-menu' ),
-    url(r'^menu/(?P<pk>[0-9]+)/add$', add_menu , name='add-menu' ),
-    url(r'^menu/(?P<pk>[0-9]+)/edit$', edit_menu, name='edit-menu'),
-=======
     url(r'^menu$', menu_list , name='list-menu' ),
     #url(r'^menu/add$', add_menu , name='add-menu' ),
     url(r'^menu/add$', MenuCreateView.as_view() , name='add-menu' ),
     #url(r'^menu/(?P<pk>[0-9]+)/edit$', edit_menu, name='edit-menu'),
     url(r'^menu/(?P<pk>[0-9]+)/edit$', MenuUpdateView.as_view(), name='edit-menu'),
->>>>>>> b7519da6b192732fa9c86c5efa01c4a23614718e
     url(r'^menu/(?P<pk>\d+)/remove/$', delete_menu, name='delete-menu'),
 
+    url(r'^restaurante/(?P<pk>\d+)/comment/$', add_comment, name='add_comment'),
+    url(r'^comment/(?P<pk>\d+)/approve/$', comment_approve, name='comment_approve'),
+    url(r'^comment/(?P<pk>\d+)/remove/$', comment_remove, name='comment_remove'),
    
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

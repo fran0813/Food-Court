@@ -1,5 +1,6 @@
 {% extends 'main/base_template.html' %}
 {% block title %} Restaurante {% endblock %}
+{% load user_tags %}
 
 {%  block content %}
 
@@ -19,7 +20,7 @@
                 <h2 class="titulo-q"><b>Descripción</b></h2>
                 <p class="lead letra-q">{{ restaurante.informacion }}</p>
                 <center>
-                <a href="{% url 'list-menu' restaurante.pk %}"><img src="../../../static/my/img/menu.png" width="20%" height="10%" alt="No found"></a>
+                <a href="{% url 'list-menu' %}"><img src="../../../static/my/img/menu.png" width="20%" height="10%" alt="No found"></a>
                 </center>
             </div>
             <div class="col-md-5 ">
@@ -32,10 +33,31 @@
         <div class="row">
             <div class="col-md-7">
                <div class="form-group">
+
+            {% if request.user|has_group:"Usuarios" %}
+               <a class="btn btn-default" href="{% url 'add_comment' pk=restaurante.pk %}">Add comment</a>
+            {% endif %}
+
+            {% for comment in restaurante.comments.all %}
+            {% if user.is_authenticated or restaurante.approved_comment %}
               <label for="comment">Comentario:</label>
-              <textarea class="form-control" rows="5" id="comment"></textarea>
+                {% if request.user|has_group:"Cliente" %}
+                    {% if not restaurante.approved_comment %}
+                        <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                    {% endif %}
+                {% endif %}
+                
+                <strong>{{ comment.usuario }}</strong>
+                <p>{{ comment.comentarios|linebreaks }}</p>
             </div>
-            </div>
+            {% endif %}
+
+            {% empty %}
+                <p>No comments here yet :(</p>
+            {% endfor %}
+        </div>
+
             <div class="col-md-5 ">
                 <ul>
                     <li><i class="fa fa-home" style="font-size: 30px"></i> {{ restaurante.direccion }} </li>

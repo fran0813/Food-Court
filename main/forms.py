@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Restaurante, Platillo
+from .models import Restaurante, Platillo, Comentario
 
 class RestauranteForm(forms.ModelForm):
 
@@ -44,3 +44,9 @@ class PlatilloForm(forms.ModelForm):
         super(PlatilloForm, self).__init__(*args, **kwargs)
         # import pdb; pdb.set_trace()
         self.fields['restaurante_platillo'].queryset = Restaurante.objects.filter( restaurante_cliente_id = user.id )
+
+class ComentarioForm(forms.ModelForm):
+
+    class Meta:
+        model = Comentario
+        fields = ('usuario', 'comentarios',)

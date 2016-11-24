@@ -2,19 +2,14 @@
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
-from models import Usuario, Cliente, Restaurante, Platillo
-from forms import RestauranteForm, PlatilloForm
+from models import Usuario, Cliente, Restaurante, Platillo, Comentario
+from forms import RestauranteForm, PlatilloForm, ComentarioForm
 from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-<<<<<<< HEAD
-=======
-
 from django.core.urlresolvers import reverse
 from django.views.generic import *
-
->>>>>>> b7519da6b192732fa9c86c5efa01c4a23614718e
 from food_court.settings import STATIC_ROLS
 
 def index(request):
@@ -135,7 +130,7 @@ def logout(request):
 def principal(request):
     return render(request, 'main/principal.html')
 
-@login_required(login_url="/")       
+@login_required(login_url="/")
 def restaurante(request):
     if request.user.groups.filter(id = 2 ).exists():
         restaurante = Restaurante.objects.all()
@@ -185,10 +180,16 @@ def restaurante_detail(request, pk):
     return render(request, 'main/restaurante-detail.html', {'restaurante': restaurante })
 
 @login_required(login_url="/")
-def menu_list(request, pk):
-    restaurante = get_object_or_404(Restaurante, pk=pk)
-    platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante.id)
+def menu_list(request):
+    if request.user.groups.filter(id = 1 ).exists():
+        # import pdb; pdb.set_trace()
+        restaurante = Restaurante.objects.filter( restaurante_cliente = request.user.id )
+        platillo = Platillo.objects.get(restaurante_platillo_id = restaurante.id)
+    else:
+        restaurante = Restaurante.objects.filter()
+        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante)
     return render(request, 'main/menu.html', { 'platillo': platillo })    
+
 
 @login_required(login_url="/")
 def add_menu(request, pk):
@@ -250,3 +251,33 @@ def delete_menu(request, pk):
     menu = get_object_or_404(Platillo, pk=pk)
     menu.delete()
     return redirect('restaurante')
+
+# <----------------------- Comentarios --------------------->
+
+@login_required(login_url="/")
+def add_comment(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    # import pdb; pdb.set_trace()
+    if request.method == "POST":
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.restaurante_id = restaurante.id
+            comment.save()
+            return redirect('restaurante-detalle', pk=restaurante.pk)
+    else:
+        form = ComentarioForm()
+    return render(request, 'main/add_comment.html', {'form': form})    
+
+@login_required(login_url="/")
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comentario, pk=pk)
+    comment.approve()
+    return redirect('restaurante-detalle', pk=comment.restaurante.pk)
+
+@login_required(login_url="/")
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comentario, pk=pk)
+    restaurante_id = comment.restaurante.id
+    comment.delete()
+    return redirect('restaurante-detalle', pk=restaurante_id)    
