@@ -41,4 +41,5 @@ class PlatilloForm(forms.ModelForm):
 
     def __init__(self, user, *args, **kwargs):
         super(PlatilloForm, self).__init__(*args, **kwargs)
+        # import pdb; pdb.set_trace()
         self.fields['restaurante_platillo'].queryset = Restaurante.objects.filter( restaurante_cliente_id = user.id )

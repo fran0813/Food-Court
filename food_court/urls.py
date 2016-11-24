@@ -23,8 +23,8 @@ urlpatterns = [
     url(r'^restaurante/(?P<pk>\d+)/remove/$', delete_restaurante, name='delete-restaurante'),
     url(r'^restaurante/(?P<pk>[0-9]+)/$', restaurante_detail, name='restaurante-detalle'),
 
-    url(r'^menu$', menu_list , name='list-menu' ),
-    url(r'^menu/add$', add_menu , name='add-menu' ),
+    url(r'^menu/(?P<pk>[0-9]+)/$', menu_list , name='list-menu' ),
+    url(r'^menu/(?P<pk>[0-9]+)/add$', add_menu , name='add-menu' ),
     url(r'^menu/(?P<pk>[0-9]+)/edit$', edit_menu, name='edit-menu'),
     url(r'^menu/(?P<pk>\d+)/remove/$', delete_menu, name='delete-menu'),
 

@@ -8,10 +8,6 @@ from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-<<<<<<< HEAD
-=======
-
->>>>>>> dd31fc2a6974442768d7e8a728075530499d50f5
 from food_court.settings import STATIC_ROLS
 
 def index(request):
@@ -31,10 +27,6 @@ def perfil(request):
 
     else:
         return render(request, 'main/perfil.html')
-<<<<<<< HEAD
-=======
-
->>>>>>> dd31fc2a6974442768d7e8a728075530499d50f5
 
 @login_required(login_url="/")
 def mapa(request):
@@ -186,27 +178,21 @@ def restaurante_detail(request, pk):
     return render(request, 'main/restaurante-detail.html', {'restaurante': restaurante })
 
 @login_required(login_url="/")
-def menu_list(request):
-    if request.user.groups.filter(id = 1 ).exists():
-        user = Cliente.objects.get(id=request.user.id)
-        restaurante = Restaurante.objects.get( restaurante_cliente = user)
-        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante.id)
-    else:
-        import pdb; pdb.set_trace()
-        restaurante = Restaurante.objects.filter()
-        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante)
+def menu_list(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante.id)
     return render(request, 'main/menu.html', { 'platillo': platillo })    
 
 @login_required(login_url="/")
-def add_menu(request):
+def add_menu(request, pk):
     
-    restaurante = Restaurante.objects.filter(id=request.user.id)
+    restaurante = get_object_or_404(Restaurante, pk=pk)
     if request.method == "POST":
         form = PlatilloForm(request.user, request.POST)
         if form.is_valid():
             menu = form.save(commit=False)
             menu.save()
-            return redirect('list-menu')
+            return redirect('list-menu', pk=menu.pk)
     else:
         form = PlatilloForm(request.user)
     return render(request, 'main/add-menu.html', { 'form' : form } )
@@ -215,17 +201,17 @@ def add_menu(request):
 def edit_menu(request, pk):
     menu = get_object_or_404(Platillo, pk=pk)
     if request.method == "POST":
-        form = PlatilloForm(request.POST, instance=menu)
+        form = PlatilloForm(request.POST, request.user, instance=menu)
         if form.is_valid():
             menu = form.save(commit=False)
             menu.save()
-            return redirect('list-menu')
+            return redirect('restaurante')
     else:
-        form = PlatilloForm(instance=menu)
+        form = PlatilloForm(request.user, instance=menu)
     return render(request, 'main/edit-menu.html', {'form': form, 'menu':menu})
 
 @login_required(login_url="/")
 def delete_menu(request, pk):
     menu = get_object_or_404(Platillo, pk=pk)
     menu.delete()
-    return redirect('list-menu')
+    return redirect('restaurante')
