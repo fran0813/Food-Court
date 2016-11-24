@@ -47,13 +47,23 @@ class Restaurante(models.Model):
 	def __str__(self):
 		return '{}'.format(self.nombre)
 
-class Usuario_Restaurante(models.Model):
-	usuario_restaurante_usuario = models.ForeignKey(Usuario, db_column='usuarios_restaurante_usuarios')
-	usuario_restaurante_restaurante = models.ForeignKey(Restaurante , db_column='usuarios_restaurante_restaurante')
+class Comentario(models.Model):
+	id = models.AutoField( primary_key=True, db_column='idusuarios_clientes')
+	usuario = models.ForeignKey(Usuario, db_column='usuarios_restaurante_usuarios')
+	restaurante = models.ForeignKey(Restaurante , related_name='comments', db_column='usuarios_restaurante_restaurante')
+	comentarios = models.TextField(db_column='comentarios')
+	approved_comment = models.BooleanField(default=False, db_column='aprobado')
 
 	class Meta:
 		db_table = 'usuarios_restaurante'
 		managed  = False
+
+	def approve(self):
+		self.approved_comment = True
+		self.save()
+
+def approved_comments(self):
+	return self.comments.filter(approved_comment=True)
 
 class Platillo(models.Model):
 	id = models.AutoField( primary_key=True, db_column='idplatillos')

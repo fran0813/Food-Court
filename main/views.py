@@ -2,16 +2,14 @@
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
-from models import Usuario, Cliente, Restaurante, Platillo
-from forms import RestauranteForm, PlatilloForm
+from models import Usuario, Cliente, Restaurante, Platillo, Comentario
+from forms import RestauranteForm, PlatilloForm, ComentarioForm
 from django.template import RequestContext
 from validator import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-
 from django.core.urlresolvers import reverse
 from django.views.generic import *
-
 from food_court.settings import STATIC_ROLS
 
 def index(request):
@@ -31,7 +29,6 @@ def perfil(request):
 
 	else:
 		return render(request, 'main/perfil.html')
-
 
 @login_required(login_url="/")
 def mapa(request):
@@ -133,7 +130,7 @@ def logout(request):
 def principal(request):
 	return render(request, 'main/principal.html')
 
-@login_required(login_url="/")       
+@login_required(login_url="/")
 def restaurante(request):
 	if request.user.groups.filter(id = 2 ).exists():
 		restaurante = Restaurante.objects.all()
@@ -199,6 +196,7 @@ def restaurante_detail(request, pk):
 	return render(request, 'main/restaurante-detail.html', {'restaurante': restaurante })
 
 @login_required(login_url="/")
+<<<<<<< HEAD
 def menu_list(request, pk):
 	if request.user.groups.filter(id = 1 ).exists():
 		restaurante = Restaurante.objects.get(pk = pk)
@@ -211,8 +209,21 @@ def menu_list(request, pk):
 		# redireccionar
 		#platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante)
 	return render(request, 'main/menu.html', { 'restaurante': restaurante })
+=======
+def menu_list(request):
+    if request.user.groups.filter(id = 1 ).exists():
+        # import pdb; pdb.set_trace()
+        restaurante = Restaurante.objects.filter( restaurante_cliente = request.user.id )
+        platillo = Platillo.objects.get(restaurante_platillo_id = restaurante.id)
+    else:
+        restaurante = Restaurante.objects.filter()
+        platillo = Platillo.objects.filter(restaurante_platillo_id = restaurante)
+    return render(request, 'main/menu.html', { 'platillo': platillo })    
+>>>>>>> 008500420c1e6ea061a492d5c4798ed3b8e590a8
+
 
 @login_required(login_url="/")
+<<<<<<< HEAD
 def add_menu(request):
 	
 	restaurante = Restaurante.objects.filter(id=request.user.id)
@@ -238,6 +249,33 @@ def edit_menu(request, pk):
 	else:
 		form = PlatilloForm(instance=menu)
 	return render(request, 'main/edit-menu.html', {'form': form, 'menu':menu})
+=======
+def add_menu(request, pk):
+    
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    if request.method == "POST":
+        form = PlatilloForm(request.user, request.POST)
+        if form.is_valid():
+            menu = form.save(commit=False)
+            menu.save()
+            return redirect('list-menu', pk=menu.pk)
+    else:
+        form = PlatilloForm(request.user)
+    return render(request, 'main/add-menu.html', { 'form' : form } )
+
+@login_required(login_url="/")
+def edit_menu(request, pk):
+    menu = get_object_or_404(Platillo, pk=pk)
+    if request.method == "POST":
+        form = PlatilloForm(request.POST, request.user, instance=menu)
+        if form.is_valid():
+            menu = form.save(commit=False)
+            menu.save()
+            return redirect('restaurante')
+    else:
+        form = PlatilloForm(request.user, instance=menu)
+    return render(request, 'main/edit-menu.html', {'form': form, 'menu':menu})
+>>>>>>> 008500420c1e6ea061a492d5c4798ed3b8e590a8
 
 class MenuCreateView(CreateView):
 	model = Platillo
@@ -269,6 +307,42 @@ class MenuUpdateView(UpdateView):
 
 @login_required(login_url="/")
 def delete_menu(request, pk):
+<<<<<<< HEAD
 	menu = get_object_or_404(Platillo, pk=pk)
 	menu.delete()
 	return redirect('list-menu')
+=======
+    menu = get_object_or_404(Platillo, pk=pk)
+    menu.delete()
+    return redirect('restaurante')
+
+# <----------------------- Comentarios --------------------->
+
+@login_required(login_url="/")
+def add_comment(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    # import pdb; pdb.set_trace()
+    if request.method == "POST":
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.restaurante_id = restaurante.id
+            comment.save()
+            return redirect('restaurante-detalle', pk=restaurante.pk)
+    else:
+        form = ComentarioForm()
+    return render(request, 'main/add_comment.html', {'form': form})    
+
+@login_required(login_url="/")
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comentario, pk=pk)
+    comment.approve()
+    return redirect('restaurante-detalle', pk=comment.restaurante.pk)
+
+@login_required(login_url="/")
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comentario, pk=pk)
+    restaurante_id = comment.restaurante.id
+    comment.delete()
+    return redirect('restaurante-detalle', pk=restaurante_id)    
+>>>>>>> 008500420c1e6ea061a492d5c4798ed3b8e590a8

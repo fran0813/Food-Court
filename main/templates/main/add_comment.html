@@ -1,0 +1,23 @@
+{% extends 'main/base_template.html' %}
+{% block title %} Restaurante {% endblock %}
+{% load user_tags %}
+
+{%  block content %}
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+   <div class="container backwhite">
+
+        <h1 class="titulo">Comentario</h1>
+
+        <form method="POST" class="post-form">{% csrf_token %}
+                {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Send</button>
+        </form>
+
+    </div>
+
+{% endblock %}
