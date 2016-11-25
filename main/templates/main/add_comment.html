@@ -14,10 +14,12 @@
         <h1 class="titulo">Comentario</h1>
 
         <form method="POST" class="post-form">{% csrf_token %}
+        <p><strong>Usuario:</strong> {{ usu }}</p> D
+        <br>
                 {{ form.as_p }}
-            <button type="submit" class="save btn btn-default">Send</button>
+            <button type="submit" class="save btn btn-default">Enviar</button>
         </form>
 
-    </div>
+    
 
 {% endblock %}

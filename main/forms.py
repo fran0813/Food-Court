@@ -50,4 +50,6 @@ class ComentarioForm(forms.ModelForm):
 
     class Meta:
         model = Comentario
-        fields = ('usuario', 'comentarios',)
+        fields = ('comentarios',)
+        labels = {'comentarios':'Comentario'}
+        widgets = { 'comentarios': forms.Textarea(attrs={'class':'form-control'})}

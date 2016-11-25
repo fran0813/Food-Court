@@ -36,9 +36,10 @@
 
             {% if request.user|has_group:"Usuarios" %}
                <a class="btn btn-default" href="{% url 'add_comment' pk=restaurante.pk %}">Agrega un Comentario</a>
-            {% endif %}
             <br>
             <hr>
+            {% endif %}
+            
               <label for="comment">Comentarios:</label>
             {% for comment in restaurante.comments.all %}
             {% if user.is_authenticated or restaurante.approved_comment %}
@@ -71,5 +72,5 @@
                 </a>
             </div>
         </div>
-    
+
 {% endblock %}

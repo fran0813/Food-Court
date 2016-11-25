@@ -197,13 +197,13 @@ def restaurante_detail(request, pk):
 
 @login_required(login_url="/")
 def menu_list(request, pk):
+    # import pdb; pdb.set_trace()
     if request.user.groups.filter(id = 1 ).exists():
         restaurante = Restaurante.objects.get(pk = pk)
     elif request.user.groups.filter(id = 2 ).exists():
-        # import pdb; pdb.set_trace()
         restaurante1 = Restaurante.objects.get(pk = pk)
         restaurante = Platillo.objects.filter(restaurante_platillo_id = restaurante1.id)
-	return render(request, 'main/menu.html', { 'restaurante': restaurante })
+    return render(request, 'main/menu.html', { 'restaurante': restaurante })
 
 @login_required(login_url="/")
 def add_menu(request):
@@ -244,7 +244,7 @@ class MenuCreateView(CreateView):
 		return kwargs
 
 	def get_success_url(self):
-		return reverse('list-menu')
+		return reverse('restaurante')
 
 class MenuUpdateView(UpdateView):
 	model = Platillo
@@ -258,7 +258,7 @@ class MenuUpdateView(UpdateView):
 		return kwargs
 
 	def get_success_url(self):
-		return reverse('list-menu')
+		return reverse('restaurante')
 
 @login_required(login_url="/")
 def delete_menu(request, pk):
@@ -271,17 +271,18 @@ def delete_menu(request, pk):
 @login_required(login_url="/")
 def add_comment(request, pk):
     restaurante = get_object_or_404(Restaurante, pk=pk)
-    # import pdb; pdb.set_trace()
+    usu = request.user
     if request.method == "POST":
         form = ComentarioForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
+            comment.usuario_id = usu.id
             comment.restaurante_id = restaurante.id
             comment.save()
             return redirect('restaurante-detalle', pk=restaurante.pk)
     else:
         form = ComentarioForm()
-    return render(request, 'main/add_comment.html', {'form': form})    
+    return render(request, 'main/add_comment.html', {'form': form, 'usu':usu})    
 
 @login_required(login_url="/")
 def comment_remove(request, pk):
