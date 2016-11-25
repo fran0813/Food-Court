@@ -35,27 +35,26 @@
                <div class="form-group">
 
             {% if request.user|has_group:"Usuarios" %}
-               <a class="btn btn-default" href="{% url 'add_comment' pk=restaurante.pk %}">Add comment</a>
+               <a class="btn btn-default" href="{% url 'add_comment' pk=restaurante.pk %}">Agrega un Comentario</a>
             {% endif %}
-
+            <br>
+            <hr>
+              <label for="comment">Comentarios:</label>
             {% for comment in restaurante.comments.all %}
             {% if user.is_authenticated or restaurante.approved_comment %}
-              <label for="comment">Comentario:</label>
                 {% if request.user|has_group:"Cliente" %}
-                    {% if not restaurante.approved_comment %}
+                    <br>
                         <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                        <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
-                    {% endif %}
                 {% endif %}
-                
-                <strong>{{ comment.usuario }}</strong>
-                <p>{{ comment.comentarios|linebreaks }}</p>
-            </div>
+                <br />
+                <p><strong>{{ comment.usuario }}</strong>: {{ comment.comentarios|linebreaks }}</p>
             {% endif %}
-
+            
             {% empty %}
                 <p>No comments here yet :(</p>
             {% endfor %}
+
+            </div>
         </div>
 
             <div class="col-md-5 ">
@@ -72,5 +71,5 @@
                 </a>
             </div>
         </div>
-
+    
 {% endblock %}

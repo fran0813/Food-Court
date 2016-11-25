@@ -31,7 +31,6 @@ urlpatterns = [
     url(r'^menu/(?P<pk>\d+)/remove/$', delete_menu, name='delete-menu'),
 
     url(r'^restaurante/(?P<pk>\d+)/comment/$', add_comment, name='add_comment'),
-    url(r'^comment/(?P<pk>\d+)/approve/$', comment_approve, name='comment_approve'),
     url(r'^comment/(?P<pk>\d+)/remove/$', comment_remove, name='comment_remove'),
    
 ]
